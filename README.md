@@ -1,368 +1,107 @@
+﻿# ResumePulse AI
 
+A Django backend prototype for a resume and job matching platform.
 
-```md
-# ResumePulse AI 🚀
+This repository currently contains a Django REST Framework backend skeleton with placeholder apps for accounts, resumes, and jobs. The `frontend/` directory is present but empty and does not yet contain a web application.
 
-An AI-driven career intelligence platform that analyzes resumes, predicts job compatibility, identifies skill gaps, and generates personalized improvement strategies.
+## Current status
 
-ResumePulse AI helps candidates understand how well their resume matches a job description and provides actionable AI-powered recommendations to improve their chances.
+- Django backend scaffold built
+- `accounts`, `resumes`, and `jobs` app skeletons present
+- Admin interface available at `/admin/`
+- No frontend app has been implemented yet
+- No custom REST API routes are configured beyond Django admin at this time
 
----
+## Tech stack
 
-## ✨ Features
-
-### Resume Intelligence
-- Upload PDF/DOCX resumes
-- Extract resume text automatically
-- Parse skills and experience information
-- Analyze resume quality
-
-### Job Match Analysis
-- Compare resume with job description
-- Generate compatibility score
-- Analyze:
-  - Skills match
-  - Experience match
-  - Keyword match
-
-### AI Career Assistant
-- Gemini API powered suggestions
-- Personalized resume improvement tips
-- Skill gap recommendations
-- Role-specific guidance
-
-### User Dashboard
-- Secure authentication
-- Resume history
-- Previous analysis reports
-- Track improvement over time
-
----
-
-# 🛠 Tech Stack
-
-## Frontend
-- React.js
-- Axios
-- React Router
-- Tailwind CSS
-
-## Backend
-- Python
-- Django
+- Python 3
+- Django 6.0.6
 - Django REST Framework
-
-## Database
 - PostgreSQL
-
-## Authentication
-- JWT Authentication
-
-## AI / NLP
-- Google Gemini API
-- TF-IDF
-- Cosine Similarity
-
-## Resume Processing
-- PyMuPDF (PDF extraction)
-- python-docx (DOCX extraction)
-
----
-
-# 📂 Project Structure
-
-```
-
-ResumePulseAI/
-
-│
-├── backend/
-│
-│   ├── config/
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │
-│   ├── accounts/
-│   │   └── Authentication system
-│   │
-│   ├── resumes/
-│   │   └── Resume upload & parsing
-│   │
-│   ├── jobs/
-│   │   └── Job description management
-│   │
-│   ├── manage.py
-│   ├── requirements.txt
-│   └── .env
-│
-├── frontend/
-│   └── React application
-│
-└── README.md
-
-````
-
----
-
-# ⚙️ Installation & Setup
-
-## Clone Repository
-
-```bash
-git clone <repository-url>
-
-cd ResumePulseAI
-````
-
----
-
-# Backend Setup
-
-Go to backend:
-
-```bash
-cd backend
-```
-
-Create virtual environment:
-
-```bash
-python -m venv ven
-```
-
-Activate:
-
-### Windows
-
-```bash
-ven\Scripts\activate
-```
-
-### Linux/Mac
-
-```bash
-source ven/bin/activate
-```
-
----
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-# Environment Variables
-
-Create `.env` inside backend folder:
-
-```env
-SECRET_KEY=your_secret_key
-DEBUG=True
-
-DB_NAME=resumepulse_db
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_HOST=localhost
-DB_PORT=5432
-
-GEMINI_API_KEY=your_api_key
-```
-
----
-
-# Database Setup
-
-Create PostgreSQL database:
-
-```sql
-CREATE DATABASE resumepulse_db;
-```
-
-Run migrations:
-
-```bash
-python manage.py migrate
-```
-
-Create admin user:
-
-```bash
-python manage.py createsuperuser
-```
-
----
-
-# Run Backend
-
-```bash
-python manage.py runserver
-```
-
-Backend runs:
-
-```
-http://127.0.0.1:8000/
-```
-
----
-
-# Frontend Setup
-
-Go to frontend:
-
-```bash
-cd frontend
-```
-
-Install packages:
-
-```bash
-npm install
-```
-
-Run:
-
-```bash
-npm run dev
-```
-
-Frontend runs:
-
-```
-http://localhost:5173/
-```
-
----
-
-# 🔐 API Features
-
-## Authentication
-
-Register user
-
-```
-POST /api/auth/register/
-```
-
-Login
-
-```
-POST /api/auth/login/
-```
-
-Refresh token
-
-```
-POST /api/auth/token/refresh/
-```
-
----
-
-## Resume API
-
-Upload resume:
-
-```
-POST /api/resumes/upload/
-```
-
-Get resumes:
-
-```
-GET /api/resumes/
-```
-
----
-
-## Job Description API
-
-Create job:
-
-```
-POST /api/jobs/
-```
-
-Get jobs:
-
-```
-GET /api/jobs/
-```
-
----
-
-# 📊 Matching Algorithm
-
-ResumePulse AI uses:
-
-## TF-IDF
-
-Converts resume and job description text into numerical vectors.
-
-## Cosine Similarity
-
-Calculates similarity between resume and job description.
-
-Output:
-
-```
-Overall Match Score: 85%
-
-Skills Match: 90%
-Experience Match: 80%
-Keyword Match: 85%
-```
-
----
-
-# 🗓 Development Roadmap
-
-## Week 1
-
-✅ Django setup
-✅ PostgreSQL connection
-✅ JWT authentication
-✅ Resume upload
-✅ PDF/DOCX parsing
-✅ Job description CRUD
-
-## Week 2
-
-⬜ NLP skill extraction
-⬜ Match scoring engine
-⬜ Analysis API
-⬜ Report generation
-
-## Week 3
-
-⬜ Gemini AI integration
-⬜ AI suggestions
-⬜ React dashboard
-
-## Week 4
-
-⬜ Deployment
-⬜ Testing
-⬜ Optimization
-
----
-
-# 🤝 Contribution
-
-Contributions, issues, and suggestions are welcome.
-
----
-
-# 📜 License
-
-MIT License
-
----
-
-# 👨‍💻 Author
-
-Built with ❤️ using Django, React, PostgreSQL, and AI.
-
-```
+- JWT authentication support via `djangorestframework-simplejwt`
+- CORS support via `django-cors-headers`
+
+## Repository structure
+
+- `backend/`
+  - `config/` — Django settings and project configuration
+  - `accounts/` — authentication app scaffold
+  - `resumes/` — resume processing app scaffold
+  - `jobs/` — job description management app scaffold
+  - `manage.py` — Django management utility
+  - `requirements.txt` — Python dependencies
+- `frontend/` — currently empty placeholder
+- `README.md` — this file
+
+## Setup
+
+1. Open a terminal and navigate to the repository root.
+2. Change directory to the backend folder:
+   ```bash
+   cd backend
+   ```
+3. Create a virtual environment:
+   ```bash
+   python -m venv ven
+   ```
+4. Activate the virtual environment:
+   - Windows:
+     ```bash
+     ven\Scripts\activate
+     ```
+   - Linux/macOS:
+     ```bash
+     source ven/bin/activate
+     ```
+5. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+6. Create a `.env` file in `backend/` with the following values:
+   ```env
+   SECRET_KEY=your_secret_key
+   DEBUG=True
+
+   DB_NAME=your_database_name
+   DB_USER=your_database_user
+   DB_PASSWORD=your_database_password
+   DB_HOST=localhost
+   DB_PORT=5432
+   ```
+7. Apply database migrations:
+   ```bash
+   python manage.py migrate
+   ```
+8. Create a Django superuser:
+   ```bash
+   python manage.py createsuperuser
+   ```
+9. Start the development server:
+   ```bash
+   python manage.py runserver
+   ```
+10. Open the admin interface at:
+    ```text
+    http://127.0.0.1:8000/admin/
+    ```
+
+## Notes
+
+- `config/settings.py` currently loads `.env` for database configuration but the `SECRET_KEY` is hardcoded in settings.
+- The repository currently has no frontend implementation in `frontend/`.
+- The backend apps are scaffolded but do not yet expose custom API endpoints.
+
+## Dependencies
+
+The project uses the following backend dependencies from `backend/requirements.txt`:
+
+- asgiref==3.11.1
+- Django==6.0.6
+- django-cors-headers==4.9.0
+- djangorestframework==3.17.1
+- djangorestframework_simplejwt==5.5.1
+- psycopg2-binary==2.9.12
+- PyJWT==2.13.0
+- python-dotenv==1.2.2
+- sqlparse==0.5.5
+- tzdata==2026.2
