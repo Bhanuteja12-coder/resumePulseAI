@@ -39,6 +39,15 @@ class AuthApiTests(APITestCase):
         self.assertIn('user', response.data)
         self.assertEqual(response.data['user']['email'], self.credentials['email'])
 
+    def test_login_without_trailing_slash(self):
+        User.objects.create_user(email=self.credentials['email'], password=self.credentials['password'])
+        response = self.client.post('/api/auth/login', {'email': self.credentials['email'], 'password': self.credentials['password']}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('access', response.data)
+        self.assertIn('refresh', response.data)
+        self.assertIn('user', response.data)
+        self.assertEqual(response.data['user']['email'], self.credentials['email'])
+
     def test_refresh_token_returns_new_access(self):
         user = User.objects.create_user(email=self.credentials['email'], password=self.credentials['password'])
         login_response = self.client.post(self.login_url, {'email': user.email, 'password': self.credentials['password']}, format='json')

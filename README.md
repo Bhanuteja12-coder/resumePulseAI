@@ -8,9 +8,11 @@ This repository currently contains a Django REST Framework backend scaffold with
 
 - Django backend scaffold built
 - `accounts` and `resumes` apps implemented with REST endpoints
-- `jobs` app scaffold present, no API routes implemented yet
+- Resume uploads now extract raw text from PDF and DOCX files and store it in the database
+- `resumes` exposes authenticated GET endpoints for list/detail retrieval of uploaded resumes
+- `jobs` app now exposes CRUD API endpoints
 - Admin interface available at `/admin/`
-- Auth and resume upload APIs tested successfully
+- Auth, resume, and job APIs tested successfully
 - No frontend app has been implemented yet
 
 ## Tech stack
@@ -42,11 +44,18 @@ This repository currently contains a Django REST Framework backend scaffold with
 - `POST /api/auth/verify/` — verify a JWT token
 - `GET /api/auth/me/` — retrieve authenticated user profile
 - `POST /api/resumes/upload/` — upload a resume file (authenticated users only)
+- `GET /api/resumes/` — list uploaded resumes for the authenticated user
+- `GET /api/resumes/<id>/` — retrieve a single uploaded resume
+- `GET /api/jobs/` — list job descriptions
+- `POST /api/jobs/` — create a job description
+- `GET /api/jobs/<id>/` — retrieve a job description
+- `PATCH /api/jobs/<id>/` — update a job description
+- `DELETE /api/jobs/<id>/` — delete a job description
 
 ### Resume upload constraints
 
 - Accepts `.pdf` and `.docx` files only
-- Requires a valid JWT access token
+- Requires a valid JWT access token for resume routes
 
 ## Setup
 
@@ -102,13 +111,13 @@ This repository currently contains a Django REST Framework backend scaffold with
 
 ## Testing
 
-The backend currently includes API tests for authentication and resume upload. Run:
+The backend currently includes API tests for authentication, resume upload, resume retrieval, and job CRUD. Run:
 
 ```bash
 python manage.py test
 ```
 
-At the time of this update, the backend test suite ran successfully with 6 passing tests.
+At the time of this update, the backend test suite ran successfully with 11 passing tests.
 
 ## Notes
 
@@ -128,5 +137,7 @@ The project uses the following backend dependencies from `backend/requirements.t
 - psycopg2-binary==2.9.12
 - PyJWT==2.13.0
 - python-dotenv==1.2.2
+- PyMuPDF==1.25.0
+- python-docx==0.8.12
 - sqlparse==0.5.5
 - tzdata==2026.2
