@@ -2,15 +2,16 @@
 
 A Django backend prototype for a resume and job matching platform.
 
-This repository currently contains a Django REST Framework backend skeleton with placeholder apps for accounts, resumes, and jobs. The `frontend/` directory is present but empty and does not yet contain a web application.
+This repository currently contains a Django REST Framework backend scaffold with working authentication and resume upload endpoints. The `frontend/` directory is present but empty and does not yet contain a web application.
 
 ## Current status
 
 - Django backend scaffold built
-- `accounts`, `resumes`, and `jobs` app skeletons present
+- `accounts` and `resumes` apps implemented with REST endpoints
+- `jobs` app scaffold present, no API routes implemented yet
 - Admin interface available at `/admin/`
+- Auth and resume upload APIs tested successfully
 - No frontend app has been implemented yet
-- No custom REST API routes are configured beyond Django admin at this time
 
 ## Tech stack
 
@@ -25,13 +26,27 @@ This repository currently contains a Django REST Framework backend skeleton with
 
 - `backend/`
   - `config/` — Django settings and project configuration
-  - `accounts/` — authentication app scaffold
-  - `resumes/` — resume processing app scaffold
+  - `accounts/` — authentication app
   - `jobs/` — job description management app scaffold
   - `manage.py` — Django management utility
   - `requirements.txt` — Python dependencies
 - `frontend/` — currently empty placeholder
+- `resumes/` — resume upload app package used by the backend
 - `README.md` — this file
+
+## Backend API endpoints
+
+- `POST /api/auth/register/` — register a new user
+- `POST /api/auth/login/` — obtain JWT access and refresh tokens
+- `POST /api/auth/refresh/` — refresh an access token
+- `POST /api/auth/verify/` — verify a JWT token
+- `GET /api/auth/me/` — retrieve authenticated user profile
+- `POST /api/resumes/upload/` — upload a resume file (authenticated users only)
+
+### Resume upload constraints
+
+- Accepts `.pdf` and `.docx` files only
+- Requires a valid JWT access token
 
 ## Setup
 
@@ -85,11 +100,21 @@ This repository currently contains a Django REST Framework backend skeleton with
     http://127.0.0.1:8000/admin/
     ```
 
+## Testing
+
+The backend currently includes API tests for authentication and resume upload. Run:
+
+```bash
+python manage.py test
+```
+
+At the time of this update, the backend test suite ran successfully with 6 passing tests.
+
 ## Notes
 
 - `config/settings.py` currently loads `.env` for database configuration but the `SECRET_KEY` is hardcoded in settings.
-- The repository currently has no frontend implementation in `frontend/`.
-- The backend apps are scaffolded but do not yet expose custom API endpoints.
+- `jobs` app is present but does not expose API routes yet.
+- `frontend/` remains a placeholder with no implementation.
 
 ## Dependencies
 
