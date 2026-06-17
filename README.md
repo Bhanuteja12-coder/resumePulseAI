@@ -46,6 +46,8 @@ This repository currently contains a Django REST Framework backend scaffold with
 - `POST /api/resumes/upload/` — upload a resume file (authenticated users only)
 - `GET /api/resumes/` — list uploaded resumes for the authenticated user
 - `GET /api/resumes/<id>/` — retrieve a single uploaded resume
+- `GET /api/reports/` — list analysis reports for the authenticated user, with pagination
+- `GET /api/reports/<id>/` — retrieve a single analysis report
 - `GET /api/jobs/` — list job descriptions
 - `POST /api/jobs/` — create a job description
 - `GET /api/jobs/<id>/` — retrieve a job description
