@@ -123,3 +123,12 @@ class ResumeDetailAPIView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         return Resume.objects.filter(user=self.request.user)
+
+class AnalysisReportDeleteAPIView(generics.DestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = AnalysisReportSerializer
+
+    def get_queryset(self):
+        return AnalysisReport.objects.filter(
+            resume__user=self.request.user
+        )

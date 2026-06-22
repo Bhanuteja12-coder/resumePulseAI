@@ -151,41 +151,77 @@ def parse_gemini_response(response_text):
 
 
 def generate_gemini_suggestions(job_description_text, gap_analysis):
-    api_key = os.getenv('GOOGLE_API_KEY')
+
+    api_key = os.getenv("GOOGLE_API_KEY")
+
     if not api_key:
-        return []
+        return fallback_suggestions(gap_analysis)
 
-    prompt_text = build_gemini_prompt(job_description_text, gap_analysis)
-    try:
-        from google.ai.generativelanguage_v1beta import GenerativeServiceClient
-        from google.ai.generativelanguage_v1beta.types import generative_service, content
-    except ImportError:
-        return []
 
     try:
-        client = GenerativeServiceClient(client_options={"api_key": api_key})
-        prompt_content = content.Content(
-            parts=[content.Part(text=prompt_text)],
-            role='user',
+        import google.generativeai as genai
+
+        genai.configure(api_key=api_key)
+
+        model = genai.GenerativeModel(
+            "gemini-2.5-flash"
         )
-        request = generative_service.GenerateContentRequest(
-            model='models/gemini-2.5-flash',
-            contents=[prompt_content],
+
+
+        prompt = build_gemini_prompt(
+            job_description_text,
+            gap_analysis
         )
-        response = client.generate_content(request=request)
-        output_text = ''
-        for candidate in getattr(response, 'candidates', []):
-            content_block = getattr(candidate, 'content', None)
-            if content_block is None:
-                continue
-            for part in getattr(content_block, 'parts', []):
-                output_text += getattr(part, 'text', '') or ''
-        return parse_gemini_response(output_text)
-    except Exception as exc:
-        import traceback
-        traceback.print_exc()
-        print('Gemini error:', repr(exc))
-        return []
+
+
+        response = model.generate_content(prompt)
+
+        return parse_gemini_response(
+            response.text
+        )
+
+
+    except Exception as e:
+
+        print("Gemini error:", e)
+
+        return fallback_suggestions(
+            gap_analysis
+        )
+
+def fallback_suggestions(gap):
+
+    suggestions = []
+
+
+    for skill in gap.get("skills", [])[:2]:
+        suggestions.append(
+            f"Add projects or experience demonstrating {skill} skills."
+        )
+
+
+    for tool in gap.get("tools", [])[:2]:
+        suggestions.append(
+            f"Include hands-on experience with {tool} in your resume."
+        )
+
+
+    for exp in gap.get("experience", [])[:1]:
+        suggestions.append(
+            f"Highlight your {exp} experience with measurable achievements."
+        )
+
+
+    if not suggestions:
+        suggestions = [
+            "Add more relevant technical projects.",
+            "Improve your resume keywords based on the job description.",
+            "Highlight measurable achievements.",
+            "Tailor your experience section for this role."
+        ]
+
+
+    return suggestions[:4]
 
 
 def extract_gap_analysis(resume_keywords, job_description_text, top_n=30):
