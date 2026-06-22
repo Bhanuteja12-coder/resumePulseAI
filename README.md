@@ -1,46 +1,30 @@
-```markdown
-# ResumePulse AI
-
+# 🚀 ResumePulse AI
 An AI-powered Resume Analyzer that compares resumes with job descriptions, generates match scores, extracts missing skills, and provides AI-driven improvement suggestions using Gemini.
-
 This repository contains a full-stack implementation featuring a Django REST Framework backend and a modern React (Vite) frontend.
-
----
-
-## Current status
-
-- **Django Backend:** Complete with REST API endpoints, JWT authentication, PostgreSQL database integration, and local file parsing (PDF/DOCX).
-- **NLP & AI Engine:** Implemented keyword extraction and match scoring via TF-IDF cosine similarity, alongside dynamic, context-aware suggestions powered by the Google Gemini API.
-- **React Frontend:** Built an interactive, responsive user interface using Tailwind CSS, React Router, Axios, and visual analytics dashboards backed by Recharts.
-- **Testing:** Comprehensive test suite execution across backend endpoints (authentication, uploads, and CRUD operations) alongside integrated frontend verification.
-
----
-
-## Tech stack
-
+## 📌 Current Status
+ * **Django Backend:** Complete with REST API endpoints, JWT authentication, PostgreSQL database integration, and local file parsing (PDF/DOCX).
+ * **NLP & AI Engine:** Implemented keyword extraction and match scoring via TF-IDF cosine similarity, alongside dynamic, context-aware suggestions powered by the Google Gemini API.
+ * **React Frontend:** Built an interactive, responsive user interface using Tailwind CSS, React Router, Axios, and visual analytics dashboards backed by Recharts.
+ * **Testing:** Comprehensive test suite execution across backend endpoints (authentication, uploads, and CRUD operations) alongside integrated frontend verification.
+## 🏗️ Tech Stack
 ### Frontend
-- React 18 (Vite)
-- TypeScript
-- Tailwind CSS
-- React Router DOM
-- Recharts (for data visualization)
-- Axios
-
+ * React 18 (Vite)
+ * TypeScript
+ * Tailwind CSS
+ * React Router DOM
+ * Recharts (for data visualization)
+ * Axios
 ### Backend
-- Python 3
-- Django 6.0.6
-- Django REST Framework
-- PostgreSQL
-- `scikit-learn` (for TF-IDF and Cosine Similarity)
-- `djangorestframework-simplejwt` (JWT Auth)
-- `django-cors-headers` (CORS handling)
-- `PyMuPDF` (fitz) & `python-docx` (for file parsing)
-- `google-generativeai` (Gemini API Integration)
-
----
-
-## Repository structure
-
+ * Python 3
+ * Django 6.0.6
+ * Django REST Framework
+ * PostgreSQL
+ * scikit-learn (for TF-IDF and Cosine Similarity)
+ * djangorestframework-simplejwt (JWT Auth)
+ * django-cors-headers (CORS handling)
+ * PyMuPDF (fitz) & python-docx (for file parsing)
+ * google-generativeai (Gemini API Integration)
+## 📁 Repository Structure
 ```text
 ResumePulseAI/
 │
@@ -63,7 +47,7 @@ ResumePulseAI/
     └── vite.config.ts
 
 ```
-## Backend API endpoints
+## 📊 Backend API Endpoints
 ### 🔐 Auth
  * POST /api/auth/register/ — register a new user
  * POST /api/auth/login/ — obtain JWT access and refresh tokens
@@ -80,15 +64,15 @@ ResumePulseAI/
  * GET /api/jobs/<id>/ — retrieve a job description
  * PATCH /api/jobs/<id>/ — update a job description
  * DELETE /api/jobs/<id>/ — delete a job description
-### 📊 Reports & Analysis
+### 📈 Reports & Analysis
  * POST /api/resumes/analyze/ — trigger hybrid NLP & Gemini analysis
  * GET /api/reports/ — list analysis reports for the authenticated user (with pagination)
  * GET /api/reports/<id>/ — retrieve a single analysis report
  * DELETE /api/resumes/reports/<id>/delete/ — delete a generated analysis report
-### File constraints
+### ⚠️ File Constraints
  * Accepts .pdf and .docx files only
  * Requires a valid JWT access token for all resume, job, and report routes
-## Setup & Installation
+## 🚀 Setup & Installation
 ### 1. Backend Setup
  1. Open a terminal and navigate to the backend folder:
 ```bash
@@ -155,21 +139,18 @@ VITE_API_BASE_URL=http://localhost:8000/api
 npm run dev
 
 ```
-## Testing
-### Backend tests
+## 🧪 Testing
+### Backend Tests
 To run the built-in Django API test configurations (including authentication flows, document parsing, and analysis routes):
 ```bash
 python manage.py test
 
 ```
-### Frontend verification
+### Frontend Verification
 Tested utilizing targeted integration routines tracking Axios response management, route shielding for private dashboards, and seamless fallback state handling during Gemini free-tier quota limitations.
-## Future Improvements
+## 🔮 Future Improvements
  * 🚀 Deploy frontend to Vercel/Netlify and backend to AWS/Render.
  * 📊 Build historical progress tracking to map keyword improvements over time.
  * 👥 Implement multi-user collaboration roles and shareable report configurations.
 ## 👨‍💻 Author
 Built with 💻 by **Bhanu Teja**
-```
-
-```
